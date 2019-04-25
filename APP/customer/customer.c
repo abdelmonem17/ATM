@@ -147,7 +147,7 @@ static customer_entity_error customer_registeration(char *username,char *passwor
 {
     customer_entity_error customer_error;
     new_entity *pCustomer_entity=create_customer_entity(username,password,ID,money,&customer_error);
-    if(!customer_error)
+    if(customer_error==no_error)
     {
 
        if(PFirst_customer_entity==NULL)
@@ -187,7 +187,7 @@ customer_entity_error customer_new(char *username,char *password,char *ID,uint16
 	}
 	else
 	{
-			error=customer_registeration(username ,password,ID,6675);
+			error=customer_registeration(username ,password,ID,_credit);
 
 		if(error==no_error)
 		{
@@ -196,7 +196,7 @@ customer_entity_error customer_new(char *username,char *password,char *ID,uint16
 			EEPROM_write_array(0xA0,(Index-1)*CUSTOMER_DATA_SIZE+START_ADDRESS+USERNAME_SIZE+PASSWORD_SIZE,ID,ID_SIZE);
 			EEPROM_write_array(0xA0,(Index-1)*CUSTOMER_DATA_SIZE+START_ADDRESS+USERNAME_SIZE+PASSWORD_SIZE+ID_SIZE,credit, CREDIT_SIZE);
 			arr[1]=++_customer_number;
-			EEPROM_write_array(0xA0,0x1FE0,arr,16);
+			EEPROM_write_array(0xA0,CHECKING_ADDRESS,arr,16);
 		}
 		else
 		{
