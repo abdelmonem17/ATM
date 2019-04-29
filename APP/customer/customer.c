@@ -82,7 +82,7 @@ static new_entity * PFirst_customer_entity=NULL;
 static new_entity * PLast_customer_entity=NULL;
 static new_entity * PCurrent_customer_entity=NULL;
 static uint8_t Index=0;
-static char _customer_number=0;
+static uint8_t _customer_number=0;
 
 static new_entity *create_customer_entity(char *username,char *password,char *ID,uint16_t money,customer_entity_error *pError)
 {
